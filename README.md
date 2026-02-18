@@ -50,8 +50,8 @@ The dashboard provides insights into:
 
 ## 📸 Screenshots
 
-![Overview](screenshots/Overview.png)
+![Overview](Screenshots/Overview.png)
 
-![Batting](screenshots/Batting.png)
+![Batting](Screenshots/Batting.png)
 
-![Bowling](screenshots/Bowling.png)
+![Bowling](Screenshots/Bowling.png)
