@@ -232,12 +232,6 @@ Purpose:
 - Data Visualization
 - Git & GitHub
 
----
-
-# 📂 Dataset
-
-Dataset excluded due to GitHub file size limits.  
-Available upon request.
 
 ---
 
