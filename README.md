@@ -1,7 +1,7 @@
 # 🏏 ICC Test Match Analytics Dashboard (Power BI)
 
 An interactive multi-page Power BI dashboard built to analyze Test cricket match data after 2000.  
-This project demonstrates end-to-end data analytics workflow including data cleaning, transformation, modeling, DAX calculations, and dashboard design.
+This project demonstrates an end-to-end data analytics workflow including data cleaning, transformation, DAX calculations, and professional dashboard design.
 
 ---
 
@@ -20,7 +20,7 @@ The goal of this project is to create an analytical dashboard that provides insi
 
 ## 1️⃣ Overview Page
 
-Executive summary view:
+Executive summary view including:
 
 - Total Runs
 - Total Wickets
@@ -53,51 +53,63 @@ Executive summary view:
 
 # 🧹 Data Cleaning & Transformation
 
-The dataset contained ball-by-ball records and required preprocessing.
+The dataset contained ball-by-ball records and required preprocessing before analysis.
+
+---
 
 ## Step 1 — Load Data
 
-- Imported dataset using Power BI Desktop.
-- Verified column data types.
+- Imported dataset into Power BI Desktop.
+- Verified and adjusted column data types.
 
 ---
 
 ## Step 2 — Data Cleaning
 
-- Removed blank/null values.
+- Removed blank/null values where necessary.
 - Corrected data types:
-  - Date → Date format
-  - Runs/Extras → Whole numbers
-- Standardized column naming.
+
+  - Date → Date format  
+  - Runs and Extras → Whole numbers  
+
+- Standardized column naming for consistency.
 
 ---
 
 ## Step 3 — Created Calculated Columns
 
-New columns were added to enable analysis.
+New calculated columns were created to enable analysis.
 
 ### Total Runs Column
+
+```
 Total Runs = runs + extras
+```
 
 Purpose:
 
-- Combine runs scored with extras.
+- Combine runs scored with extras into one metric.
 
 ---
 
 ### Ball Count Column
+
+```
 Ball_Count = 1
+```
 
 Purpose:
 
-- Used to calculate total balls.
+- Used to calculate total balls faced/bowled.
 
 ---
 
 ### Is Wicket Column
 
+```
 Is_Wicket =
 IF(player_dismissed <> BLANK(), 1, 0)
+```
 
 Purpose:
 
@@ -107,36 +119,13 @@ Purpose:
 
 ### Over Number Column
 
+```
 Over = INT(ball)
+```
 
 Purpose:
 
-- Extract over number from ball value.
-
----
-
-# 🧩 Data Modeling
-
-To allow flexible filtering:
-
-## Teams Dimension Table
-
-Created unified team table:
-Teams =
-DISTINCT(
-UNION(
-SELECTCOLUMNS(Test,“Team”,Test[batting_team]),
-SELECTCOLUMNS(Test,“Team”,Test[bowling_team])
-)
-)
-Purpose:
-
-- Single slicer controlling both batting and bowling analysis.
-
-Relationships created between:
-
-- Teams[Team] → Test[batting_team]
-- Teams[Team] → Test[bowling_team]
+- Extract over number from ball value for over-wise analysis.
 
 ---
 
@@ -144,89 +133,93 @@ Relationships created between:
 
 ## Total Runs
 
+```
 Total Runs =
 SUM(Test[Total Runs])
+```
 
 ---
 
 ## Total Balls
 
+```
 Total Balls =
 SUM(Test[Ball_Count])
+```
 
 ---
 
 ## Total Wickets
 
+```
 Total Wickets =
 SUM(Test[Is_Wicket])
+```
 
 ---
 
 ## Run Rate
 
+```
 Run Rate =
 DIVIDE([Total Runs], [Total Balls]) * 6
+```
+
 ---
 
 ## Strike Rate
 
+```
 Strike Rate =
 DIVIDE([Total Runs], [Total Balls]) * 100
+```
 
----
-
-## Batting Runs (Unified Team Filter)
-
-Total Runs Batting =
-CALCULATE(
-SUM(Test[runs]),
-TREATAS(VALUES(Teams[Team]), Test[batting_team])
-)
----
-
-## Bowling Wickets (Unified Team Filter)
-
-Total Wickets Bowling =
-CALCULATE(
-SUM(Test[Is_Wicket]),
-TREATAS(VALUES(Teams[Team]), Test[bowling_team])
-)
 ---
 
 # 🎛 Slicer Implementation
 
-- Created unified team slicer using Teams table.
-- Enabled multi-selection.
+- Added slicers for:
+
+  - Year
+  - Venue
+  - Batting Team
+  - Bowling Team
+
+- Enabled multi-selection for flexible analysis.
 - Synced slicers across all dashboard pages.
 
 Purpose:
 
-- Selecting teams updates both batting and bowling analysis.
+- Allow dynamic filtering and comparison across different match scenarios.
 
 ---
 
 # 🎨 Dashboard Design Approach
 
 - Multi-page analytical layout.
-- Different theme style for each page:
+- Different theme styling per page:
+
   - Overview → Executive style
   - Batting → Aggressive visual theme
-  - Bowling → Tactical strategic theme.
+  - Bowling → Tactical strategic theme
+
 - Consistent spacing and alignment.
-- Interactive filtering enabled.
+- Interactive filtering enabled across visuals.
 
 ---
 
 # 📸 Dashboard Screenshots
 
 ## Overview Page
+
 ![Overview](Screenshots/Overview.png)
 
 ## Batting Analysis
+
 ![Batting](Screenshots/Batting.png)
 
 ## Bowling Analysis
+
 ![Bowling](Screenshots/Bowling.png)
 
 ---
@@ -243,7 +236,7 @@ Purpose:
 
 # 📂 Dataset
 
-Dataset excluded due to GitHub size limits.  
+Dataset excluded due to GitHub file size limits.  
 Available upon request.
 
 ---
@@ -260,4 +253,3 @@ Available upon request.
 
 Swaroop  
 MCA Student | Data Analytics Enthusiast
-
