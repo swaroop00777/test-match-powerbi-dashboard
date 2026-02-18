@@ -95,6 +95,7 @@ Purpose:
 ---
 
 ### Is Wicket Column
+
 Is_Wicket =
 IF(player_dismissed <> BLANK(), 1, 0)
 
@@ -105,6 +106,7 @@ Purpose:
 ---
 
 ### Over Number Column
+
 Over = INT(ball)
 
 Purpose:
@@ -141,35 +143,41 @@ Relationships created between:
 # 📐 DAX Measures Created
 
 ## Total Runs
+
 Total Runs =
 SUM(Test[Total Runs])
 
 ---
 
 ## Total Balls
+
 Total Balls =
 SUM(Test[Ball_Count])
 
 ---
 
 ## Total Wickets
+
 Total Wickets =
 SUM(Test[Is_Wicket])
 
 ---
 
 ## Run Rate
+
 Run Rate =
 DIVIDE([Total Runs], [Total Balls]) * 6
 ---
 
 ## Strike Rate
+
 Strike Rate =
 DIVIDE([Total Runs], [Total Balls]) * 100
 
 ---
 
 ## Batting Runs (Unified Team Filter)
+
 Total Runs Batting =
 CALCULATE(
 SUM(Test[runs]),
@@ -178,6 +186,7 @@ TREATAS(VALUES(Teams[Team]), Test[batting_team])
 ---
 
 ## Bowling Wickets (Unified Team Filter)
+
 Total Wickets Bowling =
 CALCULATE(
 SUM(Test[Is_Wicket]),
